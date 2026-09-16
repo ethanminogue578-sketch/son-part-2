@@ -13,8 +13,12 @@ def home():
 def about():
     return "We are the record(store) and we make records"
 
-@app.route("/album")
+@app.route("/album", methods=["GET","POST"])
 def album():
+    term = ""
+    if request.method == "POST":
+        term = request.form["search"]
+        return render_template("albumstore.html")
     albums = {"Kind of Blue", "Rumours", "Thriller"}
     return render_template("albumstore.html", albums=albums)
 

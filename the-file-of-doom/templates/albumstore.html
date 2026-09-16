@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form method="POST">
+        <input name="search">
+        <button>Search</button>
+    {{term}}
+    </form>
+    <h1>Albums for Sale</h1>
+    <ul>
+        {% if albums %}
+            {% for album in albums %}
+                <li>{{album}}</li>
+            {% endfor %}
+        {% else %}
+            <p1>No albums in stock yet.</p1> 
+        {% endif %}
+    <h2>
+    </ul>
+</body>
+</html>

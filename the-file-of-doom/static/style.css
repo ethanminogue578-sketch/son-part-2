@@ -1,0 +1,11 @@
+body {background-color: darkcyan;
+font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+line-height: 20px;
+padding: 20px;
+margin-top: 10px;
+margin-right: 15px;
+margin-bottom: 20px;
+margin-left: 25px;}
+p1 {color:rgb(255, 184, 0)}
+h1 {color:rgb(228, 255, 26);
+     font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif}
