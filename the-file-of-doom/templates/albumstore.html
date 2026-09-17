@@ -16,12 +16,18 @@
     <ul>
         {% if albums %}
             {% for album in albums %}
-                <li>{{album}}</li>
-            {% endfor %}
+            <li>
+                <a href="{{ url_for('album', name=album) }}">{{ album }}</a>
+            </li>
+{% endfor %}
         {% else %}
             <p1>No albums in stock yet.</p1> 
         {% endif %}
     <h2>
     </ul>
+<nav>
+    <a href="{{ url_for("about") }}">About</a>
+    <a href="{{ url_for("home") }}">Home</a>
+</nav>
 </body>
 </html>

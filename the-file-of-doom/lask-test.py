@@ -6,12 +6,12 @@ def home():
     term = ""
     if request.method == "POST":
         term = request.form["search"]
-    return render_template("albumstore.html")
+    return render_template("Index.html")
     
 
 @app.route("/about")
 def about():
-    return "We are the record(store) and we make records"
+    return render_template("about.html")
 
 @app.route("/album", methods=["GET","POST"])
 def album():
@@ -21,6 +21,10 @@ def album():
         return render_template("albumstore.html")
     albums = {"Kind of Blue", "Rumours", "Thriller"}
     return render_template("albumstore.html", albums=albums)
+
+@app.route("/album/<title>")
+def title(title):
+    return render_template("album.html", title=title)
 
 @app.errorhandler(404)
 def not_found(erorr):
