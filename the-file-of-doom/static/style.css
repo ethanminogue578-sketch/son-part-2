@@ -9,3 +9,8 @@ margin-left: 25px;}
 p1 {color:rgb(255, 184, 0)}
 h1 {color:rgb(228, 255, 26);
      font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif}
+nav {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+}
