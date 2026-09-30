@@ -2,12 +2,13 @@ from flask import Flask, render_template,request
 import requests
 app = Flask(__name__)
 
+
 @app.route("/", methods=["GET","POST"])
 def home():
     term = ""
     if request.method == "POST":
         term = request.form["search"]
-    return render_template("Index.html")
+    return render_template("index.html")
     
 
 @app.route("/about")
@@ -20,22 +21,18 @@ def bookstore():
     if request.method == "POST":
         term = request.form["search"]
         return render_template("bookstore.html")
-    url = "https://openlibrary.org/search.json?q=dracula/&scrlybrkr=79698899"
-    response = requests.get(url, verify=False)
-    data = response.json()
-    books = data["docs"]
-    print(data)
+    # url = "https://openlibrary.org/search.json?q=dracula/&scrlybrkr=79698899"
+    # response = requests.get(url, verify=False)
+    # data = response.json()
+    # books = data["docs"]
+    # print(data)
     
-    for book in books:
-        print(book["title"])
-    return render_template("bookstore.html", books=books)
+    # for book in books:
+        # print(book["title"])
+    return render_template("bookstore.html")
 
-@app.route("/book/<title>")
+@app.route("/bookstore/<title>")
 def title(title):
     return render_template("book.html", title=title)
-
-@app.errorhandler(404)
-def not_found(erorr):
-    return render_template("404.html"), 404
 
 app.run(debug=True)

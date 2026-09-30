@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-</head>
-<body>
+
+ {% extends "base.html" %}
+ {% block content %}
     <form method="POST">
         <input name="search">
         <button>Search</button>
@@ -25,9 +26,8 @@
         {% endif %}
     <h2>
     </ul>
-<nav>
-    <a href="{{ url_for("about") }}">About</a>
-    <a href="{{ url_for("home") }}">Home</a>
-</nav>
-</body>
+    <a href="about">About</a>
+    <a href="index">Home</a>
+ {% endblock %}
+
 </html>

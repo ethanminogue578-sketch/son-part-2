@@ -1,17 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+ {% extends "base.html" %}
+ {% block content %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-</head>
-<body>
+
     <h1>What is this?</h1>
         <p1>This is a BOOKstore.</p1>
-    <nav>
-        <a href="{{ url_for("bookstore") }}">Book</a>
-        <a href="{{ url_for("index") }}">Home</a>
-    <nav>
-</nav>
-</body>
+    
+        <a href="bookstore">Book</a>
+        <a href="index">Home</a>
+{% endblock %}
 </html>

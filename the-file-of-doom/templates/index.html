@@ -1,17 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+ {% extends "base.html" %}
+ {% block content %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-</head>
+
 <body>
     <h1>What is this?</h1>
         <p1>This is le home page for the Book(store)</p1>
     <nav>
-        <a href="{{ url_for("bookstore") }}">Books</a>
-        <a href="{{ url_for("about") }}">About</a>
-    <nav>
-</nav>
-</body>
+        <a href="bookstore">Books</a>
+        <a href="about">About</a>
+{% endblock %}
 </html>
