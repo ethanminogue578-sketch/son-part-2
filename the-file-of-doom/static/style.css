@@ -14,3 +14,16 @@ nav {
     gap: 16px;
     align-items: center;
 }
+ul { list-style: none; padding: 0; }
+li {
+    background: white;
+    padding: 12px;
+    margin-bottom: 8px;
+    border-radius: 6px;
+}
+
+@media (max-width: 600px) {
+    body { background: rgb(1, 73, 141)}
+    nav {flex-direction: column}
+
+}

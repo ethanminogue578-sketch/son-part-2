@@ -21,6 +21,7 @@ def bookstore():
     if request.method == "POST":
         term = request.form["search"]
         return render_template("bookstore.html")
+    books = ["Dracula", "The Hobbit", "Don Quixote"]
     # url = "https://openlibrary.org/search.json?q=dracula/&scrlybrkr=79698899"
     # response = requests.get(url, verify=False)
     # data = response.json()
@@ -29,7 +30,7 @@ def bookstore():
     
     # for book in books:
         # print(book["title"])
-    return render_template("bookstore.html")
+    return render_template("bookstore.html", books=books)
 
 @app.route("/bookstore/<title>")
 def title(title):
