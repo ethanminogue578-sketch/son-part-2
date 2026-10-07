@@ -9,16 +9,17 @@
  {% extends "base.html" %}
  {% block content %}
     <form method="POST">
-        <input name="search">
-        <button>Search</button>
+        <input name="title">
+        <input name="author">
+        <button>Add</button>
     {{term}}
     </form>
     <h1>Books for Sale</h1>
-    <ul>
+    <ul class="cards"">
         {% if books %}
             {% for book in books %}
-            <li>
-                {{ book.title }}
+            <li class="card">
+                {{ book.title }} // {{ book.author }}
             </li>
 {% endfor %}
         {% else %}

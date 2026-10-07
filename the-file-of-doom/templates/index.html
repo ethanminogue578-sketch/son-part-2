@@ -2,15 +2,22 @@
 <html lang="en">
  {% extends "base.html" %}
  {% block content %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 
 <body>
     <h1>What is this?</h1>
-        <p1>This is le home page for the Book(store)</p1>
+        <p1>This is le hecking home page for the Book(store)</p1>
     <nav>
         <a href="bookstore">Books</a>
         <a href="about">About</a>
+        <button id="toggle">Dark mode</button>
+        <button> </button>
+        <script type="text/javascript" src="{{ url_for('static', filename='script.js') }}">
+        </script>
 {% endblock %}
+<body>
+
 </html>
