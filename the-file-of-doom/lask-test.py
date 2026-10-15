@@ -1,7 +1,8 @@
-from flask import Flask, render_template,request
+from flask import Flask, render_template,request,flash,session,redirect,url_for
 import requests
 import json
 app = Flask(__name__)
+app.secret_key = "change-this"
 
 try:
     with open("books.json") as f:
@@ -18,9 +19,9 @@ def save_books():
     
 @app.route("/", methods=["GET","POST"])
 def home():
-
+    if request.method == "POST":
+        session["name"] = request.form["name"]
     return render_template("index.html")
-    
 
 @app.route("/about")
 def about():
@@ -29,10 +30,18 @@ def about():
 @app.route("/bookstore", methods=["GET","POST"])
 def bookstore():
     if request.method == "POST":
-            books.append({"title" : request.form["title"],
+
+            title = request.form["title"]
+            author = request.form["author"]
+            
+            if title and author:
+                books.append({"title" : request.form["title"],
                           "author" : request.form["author"]})
-            save_books()
-            print(books)
+                flash("Book has been added.")
+                save_books()
+                print(books)
+            else:
+                flash("Fill in both fields before adding a book.")
             return render_template("bookstore.html", books=books)
     # url = "https://openlibrary.org/search.json?q=dracula/&scrlybrkr=79698899"
     # response = requests.get(url, verify=False)
@@ -47,5 +56,20 @@ def bookstore():
 @app.route("/bookstore/<title>")
 def title(title):
     return render_template("book.html", title=title)
+
+@app.route("/cart")
+def cart():
+    return render_template(cart.html, "cart", [])
+
+@app.route("/empty")
+def empty():
+    session["cart"] = []
+
+@app.route("/app/<title>")
+def add(title):
+    cart = session.get("cart", [])
+    cart.append(title)
+    session["cart"] = cart
+    return redirect(url_for("home"))
 
 app.run(debug=True)

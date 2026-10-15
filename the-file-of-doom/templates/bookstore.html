@@ -15,7 +15,7 @@
     {{term}}
     </form>
     <h1>Books for Sale</h1>
-    <ul class="cards"">
+    <ul class="cards">
         {% if books %}
             {% for book in books %}
             <li class="card">
@@ -30,5 +30,6 @@
     <a href="about">About</a>
     <a href="/">Home</a>
  {% endblock %}
+ <span id="count">0</span>
 
 </html>

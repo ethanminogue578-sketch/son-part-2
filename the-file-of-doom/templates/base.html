@@ -6,10 +6,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+<header>{% if session.name %}
+        <p>Current user: {{ session.name }}</p>
+{% endif %}
+</header>
 <body>
     <main>
         {% block content %}{% endblock %}
+        {% for m in get_flashed_messages() %}
+        <p>{{ m }}</p>
+        {% endfor %}
     </main>
+    <nav>
+        Cart ({{ session.get('cart', [])|length }})
+    </nav>
 </body>
 <script>
     console.log("hello")
