@@ -8,12 +8,18 @@
 
  {% extends "base.html" %}
  {% block content %}
+    {% if session.user %}
     <form method="POST">
         <input name="title">
         <input name="author">
         <button>Add</button>
     {{term}}
     </form>
+    {% else %}
+        <nav>
+            <a href="login">Login</a>
+        </nav>
+    {% endif %}
     <h1>Books for Sale</h1>
     <ul class="cards">
         {% if books %}

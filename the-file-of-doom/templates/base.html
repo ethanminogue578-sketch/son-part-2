@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
-<header>{% if session.name %}
-        <p>Current user: {{ session.name }}</p>
+<header>{% if session.user %}
+        <p>Current user: {{ session.user }}</p>
 {% endif %}
 </header>
 <body>

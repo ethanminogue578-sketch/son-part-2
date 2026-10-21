@@ -1,8 +1,14 @@
 from flask import Flask, render_template,request,flash,session,redirect,url_for
+from werkzeug.security import generate_password_hash, check_password_hash
 import requests
 import json
 app = Flask(__name__)
 app.secret_key = "change-this"
+
+users = {
+    "staff": generate_password_hash("bookworm")
+}
+
 
 try:
     with open("books.json") as f:
@@ -20,6 +26,9 @@ def save_books():
 @app.route("/", methods=["GET","POST"])
 def home():
     if request.method == "POST":
+        if "user" not in session:
+            flash("Please log in to add books")
+            return redirect(url_for("login"))
         session["name"] = request.form["name"]
     return render_template("index.html")
 
@@ -70,6 +79,22 @@ def add(title):
     cart = session.get("cart", [])
     cart.append(title)
     session["cart"] = cart
+    return redirect(url_for("home"))
+
+@app.route("/login", methods=["GET", "POST"])
+def login():
+    if request.method == "POST":
+        name = request.form["username"]
+        pw   = request.form["password"]
+        if name in users and check_password_hash(users[name], pw):
+            session["user"] = name
+            return redirect(url_for("home"))
+        flash("Wrong username or password")
+    return render_template("login.html")
+
+@app.route("/logout", methods=["GET", "POST"])
+def logout():
+    session.pop("user", None)
     return redirect(url_for("home"))
 
 app.run(debug=True)
