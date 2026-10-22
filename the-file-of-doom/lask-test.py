@@ -9,14 +9,13 @@ users = {
     "staff": generate_password_hash("bookworm")
 }
 
-
 try:
     with open("books.json") as f:
         books = json.load(f)
 except FileNotFoundError:
-    books = [{"title" : "Dracula", "author" : "Bram Stoker"},
-{"title" : "The Hobbit", "author" : "JRR Tolkien"},
-{"title" : "Don Quixote", "author" : "Miguel de Cervantes"},
+    books = [{"title" : "Dracula", "author" : "Bram Stoker", "id" : 1},
+{"title" : "The Hobbit", "author" : "JRR Tolkien", "id" : 2},
+{"title" : "Don Quixote", "author" : "Miguel de Cervantes", "id" : 3},
 ]
 
 def save_books():
@@ -44,8 +43,11 @@ def bookstore():
             author = request.form["author"]
             
             if title and author:
-                books.append({"title" : request.form["title"],
-                          "author" : request.form["author"]})
+                new_id = max([b["id"] for b in books], default=0) + 1
+                books.append({
+                "id": new_id, "title": title, "author": author
+            })
+                
                 flash("Book has been added.")
                 save_books()
                 print(books)
@@ -96,5 +98,25 @@ def login():
 def logout():
     session.pop("user", None)
     return redirect(url_for("home"))
+
+@app.route("/edit/<int:book_id>", methods=["GET","POST"])
+def edit(book_id):
+    book = None
+    for b in books:
+        if b["id"] == book_id: book = b
+    if request.method == "POST":
+        book["title"]  = request.form["title"]
+        book["author"] = request.form["author"]
+        save_books(); return redirect(url_for("home"))
+    return render_template("edit.html", book=book)
+
+@app.route("/delete/<int:book_id>")
+def delete(book_id):
+    for b in books:
+        if b["id"] == book_id:
+          books.remove(b); break
+    save_books()
+    return redirect(url_for("home"))
+
 
 app.run(debug=True)
